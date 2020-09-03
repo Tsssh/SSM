@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tsh.study.mapper.StudentMapper">
+  <resultMap id="BaseResultMap" type="cn.tsh.study.model.Student">
+    <result column="studentName" jdbcType="VARCHAR" property="name" />
+    <result column="studentAge" jdbcType="INTEGER" property="age" />
+    <result column="studentPhone" jdbcType="VARCHAR" property="course" />
+    <result column="studentEmail" jdbcType="VARCHAR" property="score" />
+  </resultMap>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select studentName,studentAge,studentPhone,studentEmail
+    from tb_student
+    where studentId = #{studentid}
+  </select>
+</mapper>
