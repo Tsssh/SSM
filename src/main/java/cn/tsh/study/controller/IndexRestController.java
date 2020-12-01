@@ -22,7 +22,7 @@ public class IndexRestController {
   public Map index(){
     Map<String,Object> map=new HashMap<>();
     map.put("status","0");
-    map.put("msg","正常的输出");
+    map.put("msg","正常的输出11111");
     return map;
   }
 
