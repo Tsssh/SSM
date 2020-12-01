@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<script src="../admin/jquery.min.js"></script>
+<head>
+    <title>hello</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+
+<p th:text="'Hello, ' + ${name} + '!'" id="ID">3333</p>
+</body>
+<script type="text/javascript" src="../admin/jquery.min.js"></script>
+<script type="text/javascript">
+  $(function(){
+
+    var a=$("#ID").val();
+    alert(a);
+  });
+</script>
+
+
+
+
+
+
+</html>

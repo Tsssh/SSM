@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<p th:text="${name}"></p>
+<input type="hidden" th:value="${name}" id="name2">
+<script src="js/jquery-1.8.3.js"></script>
+<script>
+  $(function(){
+    var name3=$("#name2").val();
+    alert(name3);
+  })
+</script>
+</body>
+</html>

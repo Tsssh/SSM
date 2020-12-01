@@ -1,7 +1,9 @@
 package cn.tsh.study.mapper;
 
 import cn.tsh.study.model.Student;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface StudentMapper {
     int insert(Student record);
 
