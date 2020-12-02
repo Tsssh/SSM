@@ -27,13 +27,10 @@ public class HelloController {
     @RequestMapping(value = "/select")
     public JsonResult<List> select() {
 
-        Student student1 = (Student) studentService.selectByPrimaryKey(2);
+        Student student1 = (Student) studentService.selectByPrimaryKey(1);
 
         List<Student> list = new ArrayList<>();
         list.add(student1);
-
-
-
         return new JsonResult<>(list,"select i am port"+serverPort);
     }
   @RequestMapping(value = "/select1")

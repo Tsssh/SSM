@@ -5,8 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
@@ -30,7 +28,7 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class RequestLimitAop {
 
-  private Logger LOGGER = LoggerFactory.getLogger(getClass());
+  //private Logger LOGGER = LoggerFactory.getLogger(getClass());
   @Autowired
   private RedisTemplate redisTemplate;
 
@@ -40,12 +38,12 @@ public class RequestLimitAop {
     HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
     HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
     String ip = request.getRemoteAddr();
-    LOGGER.info("访问的ip地址为：{}", ip);
+    log.info("访问的ip地址为：{}", ip);
     String url = request.getRequestURL().toString();
     String key = "req_limit_".concat(url).concat("_").concat(ip);
     boolean checkResult = checkByRedis(limit, key);
     if (!checkResult) {
-      LOGGER.info("requestLimited," + "[用户ip:{}],[访问地址:{}]超过了限定的次数[{}]次", ip, url, limit.count());
+      log.info("requestLimited," + "[用户ip:{}],[访问地址:{}]超过了限定的次数[{}]次", ip, url, limit.count());
        throw new RuntimeException("请求超出限制");
     }
   }
@@ -64,13 +62,13 @@ public class RequestLimitAop {
         /**
          * 该次请求已经超过了规定时间范围内请求的最大次数
          */
-        LOGGER.info("当前请求次数为：{}，该次请求已经超过了规定时间范围内请求的最大次数{}", cnt,limit.count());
+        log.info("当前请求次数为：{}，该次请求已经超过了规定时间范围内请求的最大次数{}", cnt,limit.count());
         return false;
       } else {
         /**
          * 该次请求已经未超过了规定时间范围内请求的最大次数，可以继续请求
          */
-        LOGGER.info("当前请求次数为：{}，该次请求未超过规定时间范围内请求的最大次数{}，可以继续请求", cnt,limit.count());
+        log.info("当前请求次数为：{}，该次请求未超过规定时间范围内请求的最大次数{}，可以继续请求", cnt,limit.count());
         return true;
       }
 

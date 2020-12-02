@@ -1,6 +1,7 @@
 package cn.tsh.study.controller;
 
 import cn.tsh.study.anntion.AccessLimit;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,12 +15,19 @@ import java.util.Map;
  * @modified By：
  * @version: $
  */
+@Slf4j
 @RestController
 @RequestMapping("/api")
 public class IndexRestController {
+  //private static final Logger LOG = LoggerFactory.getLogger(IndexRestController.class);
   @RequestMapping("/index")
   @AccessLimit(count = 5,time = 60000)
   public Map index(){
+    log.info("==========print log==========");
+    log.trace("trance");
+    log.debug("debug");
+    log.warn("warn");
+    log.error("error");
     Map<String,Object> map=new HashMap<>();
     map.put("status","0");
     map.put("msg","正常的输出");
@@ -31,7 +39,7 @@ public class IndexRestController {
    * */
   @RequestMapping("/err")
   public Map err(){
-
+    log.info("==========print log==========");
     throw new RuntimeException("抛出一个异常");
   }
 
