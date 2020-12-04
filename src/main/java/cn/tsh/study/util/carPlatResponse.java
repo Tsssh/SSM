@@ -1,4 +1,8 @@
 package cn.tsh.study.util;
+
+/**
+ *
+ */
 public class carPlatResponse {
 
     /****
