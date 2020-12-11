@@ -1,8 +1,11 @@
 package cn.tsh.study.util;
 
-import java.io.Serializable;
+import com.google.gson.Gson;
 
-public class Result<T> implements Serializable {
+import java.io.Serializable;
+import java.util.HashMap;
+
+public class Result implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -14,21 +17,21 @@ public class Result<T> implements Serializable {
         return status;
     }
 
-    public Result<T> setStatus(String status) {
+    public Result setStatus(String status) {
         this.status = status;
         return  this;
     }
 
     private String status;
 
-    private T bodyData;
-    private T commData;
+    private HashMap bodyData;
+    private HashMap commData;
 
-    public T getCommData() {
+    public HashMap getCommData() {
         return commData;
     }
 
-    public Result<T> setCommData(T commData) {
+    public Result setCommData(HashMap commData) {
         this.commData = commData;
         return this;
     }
@@ -38,7 +41,7 @@ public class Result<T> implements Serializable {
         this.msg = ResultsCode.SUCCESS.message;
     }
 
-    public Result<T> setCode(ResultsCode resultsCode) {
+    public Result setCode(ResultsCode resultsCode) {
         this.code = resultsCode.code;
         return this;
     }
@@ -47,7 +50,7 @@ public class Result<T> implements Serializable {
         return code;
     }
 
-    public Result<T> setCode(String code) {
+    public Result setCode(String code) {
         this.code = code;
         return this;
     }
@@ -56,34 +59,44 @@ public class Result<T> implements Serializable {
         return msg;
     }
 
-    public Result<T> setMsg(String msg) {
+    public Result setMsg(String msg) {
         this.msg = msg;
         return this;
     }
 
-    public T getBodyData() {
+    public HashMap getBodyData() {
         return bodyData;
     }
 
-    public Result<T> setBodyData(T bodyData) {
+    public Result setBodyData(HashMap bodyData) {
         this.bodyData = bodyData;
         return this;
     }
 
     @Override
     public String toString() {
-        return "{" +
+
+          String common=commData==null? "\"respCommonCom\":"+"{ }":
+            "\"respCommonCom\":"+ new Gson().toJson(commData);
+          String body=bodyData==null?"\"respBodyCom\": "+"{ }":
+            "\"respBodyCom\": "+new Gson().toJson(bodyData);
+           return "{" +
                 "\"C-response-Desc\":"+ '\"'+msg+ '\"'+","
-                + "\"C-response-Body\":"+"{"+"\"respCommonCom\":{"+ commData +"}"+","
-                 +"\"respBodyCom\":{"+ bodyData +"}"+"}"+","
+                + "\"C-response-Body\":"
+                + "{"+ body+","
+                + common+"}"+","
                 + "\"C-response-Code\":"+ '\"'+code+ '\"'+","
                 + "\"C-API-Status\":"+ '\"'+status+ '\"'+
-
         '}';
-
-
-
     }
+  public static void main(String[] args) {
+    HashMap<String, String> para = new HashMap<String, String>();
+    para.put("C-response-Desc","success");
+    para.put("C-API-Status","00");
+    para.put("C-response-Code","1111");
 
+    String a= carPlatResponse.success();
+    System.out.println(a);
+    }
 
 }

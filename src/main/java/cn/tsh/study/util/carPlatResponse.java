@@ -1,8 +1,7 @@
 package cn.tsh.study.util;
 
-/**
- *
- */
+import java.util.HashMap;
+
 public class carPlatResponse {
 
     /****
@@ -24,36 +23,37 @@ public class carPlatResponse {
     private final static String SUCCESSSTATUE = "00";
 
 
-    public static <T> Result<T> success() {
-        return new Result<T>().setCode(ResultsCode.SUCCESS).setMsg(SUCCESS).setStatus(SUCCESSSTATUE);
+    public static String success() {
+        return new Result().setCode(ResultsCode.SUCCESS).setMsg(SUCCESS).setStatus(SUCCESSSTATUE).toString();
     }
 
 
-    public static <T> Result<T> success(T bodyData, T commData) {
-        return new Result<T>().setCode(ResultsCode.SUCCESS).setMsg(SUCCESS).setBodyData(bodyData).setStatus(SUCCESSSTATUE).setCommData(commData);
+    public static  String success(HashMap bodyData, HashMap commData) {
+        return new Result().setCode(ResultsCode.SUCCESS).setMsg(SUCCESS).setBodyData(bodyData).setStatus(SUCCESSSTATUE).setCommData(commData).toString();
     }
-    public static <T> Result<T> success(T bodyData) {
-        return new Result<T>().setCode(ResultsCode.SUCCESS).setMsg(SUCCESS).setBodyData(bodyData).setStatus(SUCCESSSTATUE);
-    }
-
-
-    public static <T> Result<T> error(ResultsCode resultsCode) {
-        return new Result<T>().setCode(resultsCode.code).setMsg(resultsCode.message).setStatus(FAILEDSTATUS);
+    public static String success(HashMap bodyData) {
+        return new Result().setCode(ResultsCode.SUCCESS).setMsg(SUCCESS).setBodyData(bodyData).setStatus(SUCCESSSTATUE).toString();
     }
 
 
-    public static <T> Result<T> error(String mesage) {
-        return new Result<T>().setMsg(mesage).setCode(ResultsCode.FAIL).setStatus(FAILEDSTATUS);
+    public static  String error(ResultsCode resultsCode) {
+        return new Result().setCode(resultsCode.code).setMsg(resultsCode.message).setStatus(FAILEDSTATUS).toString();
     }
 
 
-    public static <T> Result<T> error(String mesage, ResultsCode resultsCode) {
-        return new Result<T>().setMsg(mesage).setCode(resultsCode.code).setStatus(FAILEDSTATUS);
+    public static  String error(String mesage) {
+        return new Result().setMsg(mesage).setCode(ResultsCode.FAIL).setStatus(FAILEDSTATUS).toString();
     }
 
-    public static <T> Result<T> error() {
-        return new Result<T>().setCode(ResultsCode.FAIL).setMsg(FAILED).setStatus(FAILEDSTATUS);
+
+    public static  String error(String mesage, ResultsCode resultsCode) {
+        return new Result().setMsg(mesage).setCode(resultsCode.code).setStatus(FAILEDSTATUS).toString();
     }
+
+    public static  String error() {
+        return new Result().setCode(ResultsCode.FAIL).setMsg(FAILED).setStatus(FAILEDSTATUS).toString();
+    }
+
 
 
 }
